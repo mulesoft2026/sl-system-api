@@ -1,0 +1,116 @@
+#%RAML 1.0
+title: EmployeeManagement01
+protocols:
+  - HTTP
+baseUri: http://localhost:8081
+version: v1
+mediaType: 
+- application/json
+traits:
+  errorTrait: !include exchange_modules/6a2cb3b1-200e-45db-84ad-26184c73858a/errotrait/1.0.0/errotrait.raml
+  clientIdTrait: !include exchange_modules/6a2cb3b1-200e-45db-84ad-26184c73858a/securetrait/1.0.0/securetrait.raml
+
+/employees:
+  post:
+    description: Create Employees
+    body:
+      application/json:
+        type : !include DataTypes/postEmployeeRequest.raml
+        example: !include Examples/postEmployeeRequest.json
+    responses:
+     201:
+       body:
+         application/json:
+           type: !include DataTypes/postemployeeResponse.raml
+           example: !include Examples/postEmployeeResponse.json
+  get:
+    description: Get All Employees
+    body:
+      application/json:
+        type: !include DataTypes/getAllEmployees.raml
+        example: !include Examples/getAllEmployees.json
+        
+
+/employees/{employeeId}:
+  get:
+    description: Get Employee by ID
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include DataTypes/getEmployeeById.raml
+            example: !include Examples/getEmployeeById.json
+  put:
+    description: Update Employee
+    body:
+      application/json:
+        type: !include DataTypes/UpdateEmployeeRequest.raml
+        example: !include Examples/UpdateEmployeeRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include DataTypes/UpdateEmployeeResponse.raml
+            example: !include Examples/UpdateEmployeeResponse.json
+  delete:
+    description: Delete Employee
+    body:
+      application/json:
+        type: !include DataTypes/DeleteEmployee.raml
+        example: !include Examples/DeleteEmployee.json
+/departments:
+  post:
+    description: Create Department
+    body:
+      application/json:
+        type: !include DataTypes/CreateDepartmentRequest.raml
+        example: !include Examples/CeateDepartmentRequest.json
+    responses:
+      201:
+        body:
+          application/json:
+            type: !include DataTypes/createDepartmentResponse.raml
+            example: !include Examples/createDepartmentResponse.json
+  get:
+    description: Get Departments
+    body:
+      application/json:
+        type: !include DataTypes/getDepartments.raml
+        example: !include Examples/getDepartments.json
+
+/payroll/{employeeId}:
+  get:
+    description: get Payroll By Employee
+    body:
+      application/json:
+        type: !include DataTypes/getPayrollByEmployee.raml
+        example: !include Examples/getPayrollByEmployee.json
+/payroll:
+  get:
+    description: Get Payroll History
+    body:
+      application/json:
+        type: !include DataTypes/GetPayrollHistory.raml
+        example: !include Examples/getPayrollHistory.json
+/payroll/process:
+  post:
+    description: Trigger Payroll Batch Process
+    body:
+      application/json:
+        type: !include DataTypes/postRequestPayrollBatchProcess.raml
+        example: !include Examples/postRequestPayrollBatchProcess.json
+    responses:
+      201:
+        body:
+          application/json:
+            type: !include DataTypes/postResponsePayrollBatchProcess.raml
+            example: !include Examples/postResponsePayrollBatchProcess.json
+/batch/{batchId}:
+  get:
+    description: Get Batch Status
+    body:
+      application/json:
+        type: !include DataTypes/getBatchStatus.raml
+        example: !include Examples/getBatchStatus.json
+
+          

@@ -1,0 +1,56 @@
+#%RAML 1.0 Trait
+responses:
+  404:
+    body:
+      application/json:
+        type: object
+        properties:
+          message: string
+        example:
+          value:
+            message: Resource Not Found
+
+  405:
+    body:
+      application/json:
+        type: object
+        properties:
+          message: string
+        example:
+          value:
+            message: Method Not Allowed
+  
+  406:
+    body:
+      application/json:
+        type: object
+        properties:
+          message: string
+        example:
+          value:
+            message: Not Acceptable
+  
+  415:
+    body:
+      application/json:
+        type: object
+        properties:
+          message: string
+        example:
+          value:
+            message: Unsupported Media Type
+  
+  400:
+    body:
+      application/json:
+        type: object
+        properties:
+          message: string
+        example:
+          value:
+            message: Bad Request
+            
+        
+                    
+
+  

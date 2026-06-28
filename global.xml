@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	<api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="9b69cbcc-b492-40a5-8116-c4f1fc21d44a" flowRef="sl-systems-api-main" />
+	
+	 <http:listener-config name="sl-systems-api-httpListenerConfig">
+        <http:listener-connection host="0.0.0.0" port="${http.listener.port}" />
+    </http:listener-config>
+    
+    <salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="7288b377-2374-457b-ba55-047ba90c9ec8" >
+		<salesforce:basic-connection username="${salesforce.username}" password="${secure::salesforce.password}" securityToken="lsRw8Y7EoOL8PurzG3B4Nuij3" />
+	</salesforce:sfdc-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="00d4dd6a-39d6-4c4c-9a0a-30e2fc4d0536" file="properties/${mule.env}.properties" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="0620caa0-cd04-4e1d-870f-0474f8c70142" file="properties/${mule.env}.properties" key="mulesoftmulesoft" />
+	
+</mule>
